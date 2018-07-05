@@ -1,0 +1,36 @@
+100GB TPCH
+
+Q01     474.15194702
+Q02     160.89022827
+Q03     879.59887695
+Q04     560.95733643
+Q05     1595.32409668
+Q06     376.90814209
+Q07     985.36907959
+Q08     1206.56054688
+Q09     1222.13342285
+Q10     623.91485596
+Q11     165.06297302
+Q12     547.55596924
+Q13     252.30049133
+Q14     428.47354126
+Q16     174.95605469
+Q17     1391.71374512
+Q18     1210.85803223
+Q19     446.85778809
+Q20     551.07336426
+Q21     3350.18872070
+Q22     163.13679504
+Q15     415.26055908
+=========================
+totoal   17183.24657 secs = 286 mins = 4.7 hours
+
+cluster, 2 salve nodes, 
+4 vCPU, 15 GB mem, each node
+executor-memory 12G
+
+
+./bin/spark-submit  --executor-memory 12G --master spark://llvm-cluster.c.starcloud-200604.internal:7077 --conf 'spark.executor.extraJavaOptions=-javaagent:/home/ycx/tmp/tmp/statsd-jvm-profiler-2.1.1-SNAPSHOT-jar-with-dependencies.jar=server=10.142.0.6,port=8086,reporter=InfluxDBReporter,database=q20,username=profiler,password=profiler,prefix=MyNamespace.MySparkApplication,tagMapping=namespace.application'   --jars /home/ycx/tmp/tmp/statsd-jvm-profiler-2.1.1-SNAPSHOT-jar-with-dependencies.jar  --class "main.scala.TpchQuery" /home/ycx/tmp/tmp/spark-tpc-h-queries_2.11-1.0.jar 20 > log.20
+
+
+
